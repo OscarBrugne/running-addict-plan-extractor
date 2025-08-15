@@ -1,5 +1,9 @@
 from running_addict_plan_extractor.data import client
 from running_addict_plan_extractor.data.running_addict_api import html_parser
+from running_addict_plan_extractor.data.running_addict_api.dto import (
+    TrainingPlanRunningAddictDTO,
+)
+
 
 HALF_MARATHON_3X12WEEKS_URL: str = (
     "https://www.running-addict.fr/plan-dentrainement-semi-marathon-3-seances-sur-12-semaines/"
@@ -13,5 +17,7 @@ def get_half_marathon_plan() -> str:
         str: The title of the training plan.
     """
     html: str = client.get_html(HALF_MARATHON_3X12WEEKS_URL)
-    title: str = html_parser.parse_training_plan_title(html)
+    training_plan: TrainingPlanRunningAddictDTO = html_parser.parse_training_plan(html)
+    title: str = training_plan.title
+
     return title
