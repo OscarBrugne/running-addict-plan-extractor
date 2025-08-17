@@ -27,6 +27,7 @@ if __name__ == "__main__":
         "5×4′ allure 10km (récup:1’30 EF)",
         "4×5′ Allure 21km récup : 2′ EF",
         "3 x 2′ allure 21km (recup 2′ footing très lent)",
+        "6×10″ sprint en côte / récup: 1’30 lent",
         "15′ progressif allure 42km > allure 10km",
         "20′ progressif Allure 42km > Allure 10km",
         "6x100m en accélération progressive",
@@ -35,6 +36,16 @@ if __name__ == "__main__":
 
     for step in steps:
         print(f"Testing step: {step}")
+        step_dto = StepRunningAddictDTO(description=step)
+        parsed_step: BaseStep = parse_step(step_dto)
+        print(f"  Parsed step: {parsed_step}")
+        print()
+
+    steps_errors: list[str] = [
+        "10 x 30″ en côte (recup descente en footing lent)",
+    ]
+    for step in steps_errors:
+        print(f"Testing step (expected error): {step}")
         step_dto = StepRunningAddictDTO(description=step)
         parsed_step: BaseStep = parse_step(step_dto)
         print(f"  Parsed step: {parsed_step}")

@@ -17,3 +17,5 @@ class Pace(Enum):
     TEN_KM = auto()
     HALF_MARATHON = auto()
     MARATHON = auto()
+    SLOW = auto()
+    HILL = auto()

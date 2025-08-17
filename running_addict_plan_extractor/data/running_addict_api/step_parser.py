@@ -17,7 +17,7 @@ DURATION_REGEX: re.Pattern[str] = re.compile(
     re.IGNORECASE,
 )
 PACE_REGEX: re.Pattern[str] = re.compile(
-    r"(ef|allure\s*(?:5|10|21|42)km|footing.*)",
+    r"(ef|allure\s*(?:5|10|21|42)km|.*footing.*|.*lent.*|.*côte.*)",
     re.IGNORECASE,
 )
 CONSTANT_STEP_REGEX: re.Pattern[str] = re.compile(
@@ -42,6 +42,7 @@ def parse_step(step_dto: StepRunningAddictDTO) -> BaseStep:
     description: str = (
         step_dto.description.replace("’", "'")
         .replace("′", "'")
+        .replace("″", '"')
         .replace("×", "x")
         .replace(" x", "x")
         .replace("x ", "x")
@@ -84,7 +85,7 @@ def parse_pace(pace_str: str) -> Pace:
         raise ParseError(f"Unknown pace format: '{pace_str}'")
 
     pace_val: str = match.group(1).lower()
-    if "ef" in pace_val or "footing" in pace_val:
+    if "ef" in pace_val in pace_val:
         return Pace.BASE
     if "5km" in pace_val:
         return Pace.FIVE_KM
@@ -94,6 +95,10 @@ def parse_pace(pace_str: str) -> Pace:
         return Pace.HALF_MARATHON
     if "42km" in pace_val:
         return Pace.MARATHON
+    if "footing" in pace_val or "lent" in pace_val:
+        return Pace.SLOW
+    if "côte" in pace_val:
+        return Pace.HILL
 
     raise ParseError(f"Unknown pace format: '{pace_str}'")
 
