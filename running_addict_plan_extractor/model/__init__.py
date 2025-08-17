@@ -1,4 +1,4 @@
-from .enum import Pace
+from .enum import Day, Pace
 from .model import (
     BaseStep,
     ConstantStep,
@@ -9,6 +9,7 @@ from .model import (
 )
 
 __all__: list[str] = [
+    "Day",
     "Pace",
     "BaseStep",
     "ConstantStep",

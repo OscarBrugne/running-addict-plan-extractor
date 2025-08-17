@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from running_addict_plan_extractor.model.enum import Pace
+from running_addict_plan_extractor.model.enum import Day, Pace
 
 
 @dataclass
@@ -40,3 +40,4 @@ class TrainingPlan:
     title: str
     description: str
     workouts: list[Workout]
+    days: list[Day]
