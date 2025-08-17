@@ -15,7 +15,12 @@ from running_addict_plan_extractor.model.model import (
 )
 
 
+def map_base_step(step_dto: StepRunningAddictDTO) -> BaseStep:
+    return BaseStep(description=step_dto.description)
+
+
 def map_step(step_dto: StepRunningAddictDTO) -> BaseStep:
+    # TODO : implement mapping for different step types from the description
     return BaseStep(description=step_dto.description)
 
 

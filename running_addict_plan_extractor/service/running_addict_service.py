@@ -1,10 +1,18 @@
 from running_addict_plan_extractor.data import running_addict_api
-from running_addict_plan_extractor.model.model import TrainingPlan
+from running_addict_plan_extractor.model.model import BaseStep, TrainingPlan
 
 
 def get_training_plan_title() -> str:
-    title: str = running_addict_api.get_half_marathon_plan_title()
-    return title
+    training_plan: TrainingPlan = running_addict_api.get_half_marathon_plan()
+    return training_plan.title
+
+
+def get_steps_description() -> list[str]:
+    training_plan: TrainingPlan = running_addict_api.get_half_marathon_plan()
+    steps: list[BaseStep] = [
+        step for workout in training_plan.workouts for step in workout.steps
+    ]
+    return [step.description for step in steps]
 
 
 def get_training_plan_str() -> str:

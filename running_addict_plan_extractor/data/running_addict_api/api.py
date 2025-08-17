@@ -12,19 +12,6 @@ HALF_MARATHON_3X12WEEKS_URL: str = (
 )
 
 
-def get_half_marathon_plan_title() -> str:
-    """Retrieve the Half Marathon 3x12 Weeks training plan from Running Addict.
-
-    Returns:
-        str: The title of the training plan.
-    """
-    html: str = client.get_html(HALF_MARATHON_3X12WEEKS_URL)
-    training_plan: TrainingPlanRunningAddictDTO = html_parser.parse_training_plan(html)
-    title: str = training_plan.title
-
-    return title
-
-
 def get_half_marathon_plan() -> TrainingPlan:
     """Retrieve the Half Marathon 3x12 Weeks training plan from Running Addict.
 
