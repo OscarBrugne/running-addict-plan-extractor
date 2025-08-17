@@ -4,6 +4,7 @@ from running_addict_plan_extractor.data.running_addict_api.dto import (
     WeekRunningAddictDTO,
     TrainingPlanRunningAddictDTO,
 )
+from running_addict_plan_extractor.data.running_addict_api.step_parser import parse_step
 from running_addict_plan_extractor.model.enum import Day
 from running_addict_plan_extractor.model.model import (
     BaseStep,
@@ -20,8 +21,7 @@ def map_base_step(step_dto: StepRunningAddictDTO) -> BaseStep:
 
 
 def map_step(step_dto: StepRunningAddictDTO) -> BaseStep:
-    # TODO : implement mapping for different step types from the description
-    return BaseStep(description=step_dto.description)
+    return parse_step(step_dto)
 
 
 def map_workout(workout_dto: WorkoutRunningAddictDTO) -> Workout:

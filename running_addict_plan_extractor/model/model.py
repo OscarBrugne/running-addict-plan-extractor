@@ -10,7 +10,7 @@ class BaseStep:
 
 @dataclass
 class ConstantStep(BaseStep):
-    duration_minutes: int
+    duration_minutes: float
     pace: Pace
 
 
@@ -23,7 +23,7 @@ class IntervalStep(BaseStep):
 
 @dataclass
 class ProgressiveStep(BaseStep):
-    duration_minutes: int
+    duration_minutes: float
     start_pace: Pace
     end_pace: Pace
 
