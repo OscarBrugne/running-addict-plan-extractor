@@ -1,39 +1,49 @@
 from running_addict_plan_extractor.data import running_addict_api
+from running_addict_plan_extractor.model.model import BaseStep, TrainingPlan
 
 
 def get_training_plan_title() -> str:
-    title: str = running_addict_api.get_half_marathon_plan_title()
-    return title
+    training_plan: TrainingPlan = running_addict_api.get_half_marathon_plan(
+        running_addict_api.TrainingPlanType.HALF_MARATHON_3X12WEEKS
+    )
+    return training_plan.title
+
+
+def get_steps_description() -> list[str]:
+    training_plan: TrainingPlan = running_addict_api.get_half_marathon_plan(
+        running_addict_api.TrainingPlanType.HALF_MARATHON_3X12WEEKS
+    )
+    steps: list[BaseStep] = [
+        step for workout in training_plan.workouts for step in workout.steps
+    ]
+    return [step.description for step in steps]
 
 
 def get_training_plan_str() -> str:
-    training_plan: running_addict_api.TrainingPlanRunningAddictDTO = (
-        running_addict_api.get_half_marathon_plan()
+    training_plan: TrainingPlan = running_addict_api.get_half_marathon_plan(
+        running_addict_api.TrainingPlanType.HALF_MARATHON_3X12WEEKS
     )
     training_plan_str: str = pretty_format_training_plan(training_plan)
     return training_plan_str
 
 
 def pretty_format_training_plan(
-    training_plan: running_addict_api.TrainingPlanRunningAddictDTO,
+    training_plan: TrainingPlan,
 ) -> str:
     """
     Format the training plan into a human-readable string.
 
     Args:
-        training_plan (TrainingPlanRunningAddictDTO): The training plan to format.
+        training_plan (TrainingPlan): The training plan to format.
 
     Returns:
         str: The formatted training plan.
     """
     formatted_training_plan: str = f"Training Plan: {training_plan.title}\n"
-    for week in training_plan.weeks:
-        formatted_training_plan += f"Week {week.week}:\n"
-        for workout in week.workouts:
-            formatted_training_plan += (
-                f"  - {workout.day} ({workout.duration} - {workout.effort_level})\n"
-            )
-            for step in workout.steps:
-                formatted_training_plan += f"    - {step.description}\n"
-            formatted_training_plan += f"    Coach's Advice: {workout.coach_advice}\n"
+    formatted_training_plan += f"  Description: {training_plan.description}\n"
+    for workout in training_plan.workouts:
+        formatted_training_plan += f"Workout: {workout.title}\n"
+        formatted_training_plan += f"  Description: {workout.description}\n"
+        for step in workout.steps:
+            formatted_training_plan += f"    - {step.description}\n"
     return formatted_training_plan

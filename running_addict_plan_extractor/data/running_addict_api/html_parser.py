@@ -1,7 +1,7 @@
 import bs4
 
 from running_addict_plan_extractor.data.running_addict_api.dto import (
-    StepDTO,
+    StepRunningAddictDTO,
     WorkoutRunningAddictDTO,
     WeekRunningAddictDTO,
     TrainingPlanRunningAddictDTO,
@@ -139,7 +139,7 @@ def extract_workout(workout_div: bs4.Tag) -> WorkoutRunningAddictDTO:
     raw_duration: str = spans[1].get_text(strip=True)
     effort_level: int = len(spans[2].select(".fa-tint"))
 
-    steps: list[StepDTO] = extract_steps(workout_div)
+    steps: list[StepRunningAddictDTO] = extract_steps(workout_div)
 
     coach_advice_tag: bs4.Tag | None = workout_div.select_one(".right-sec p")
     assert (
@@ -157,7 +157,7 @@ def extract_workout(workout_div: bs4.Tag) -> WorkoutRunningAddictDTO:
     )
 
 
-def extract_steps(workout_div: bs4.Tag) -> list[StepDTO]:
+def extract_steps(workout_div: bs4.Tag) -> list[StepRunningAddictDTO]:
     """
     Extract the steps of a workout.
 
@@ -170,11 +170,11 @@ def extract_steps(workout_div: bs4.Tag) -> list[StepDTO]:
     steps_container: bs4.Tag | None = workout_div.select_one(".left-sec")
     assert steps_container, "Left section '.left-sec' not found in workout card"
 
-    steps: list[StepDTO] = []
+    steps: list[StepRunningAddictDTO] = []
     step_divs: bs4.ResultSet[bs4.Tag] = steps_container.select("div")
     for step_div in step_divs:
         raw_step_description: str = step_div.get_text(strip=True)
         assert raw_step_description, "Empty step description found in steps container"
-        steps.append(StepDTO(description=raw_step_description))
+        steps.append(StepRunningAddictDTO(description=raw_step_description))
 
     return steps

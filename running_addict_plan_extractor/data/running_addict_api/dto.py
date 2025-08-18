@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class StepDTO:
+class StepRunningAddictDTO:
     description: str
 
 
@@ -11,7 +11,7 @@ class WorkoutRunningAddictDTO:
     day: str
     duration: str
     effort_level: int
-    steps: list[StepDTO]
+    steps: list[StepRunningAddictDTO]
     coach_advice: str
 
 
