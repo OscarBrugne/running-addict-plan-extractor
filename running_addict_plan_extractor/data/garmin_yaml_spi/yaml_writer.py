@@ -31,8 +31,8 @@ def training_plan_to_yaml_dict(plan: TrainingPlanYamlDTO) -> dict[str, Any]:
 
 def step_to_yaml_dict(step: StepYamlDTO) -> dict[str, Any]:
     if isinstance(step.value, list):
-        return {step.type: [step_to_yaml_dict(s) for s in step.value]}
+        return {step.step_type: [step_to_yaml_dict(s) for s in step.value]}
     if isinstance(step.value, str):
-        return {step.type: step.value}
+        return {step.step_type: step.value}
 
     raise ValueError(f"Unsupported step value type: {type(step.value)}")

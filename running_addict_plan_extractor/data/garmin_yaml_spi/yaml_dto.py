@@ -1,7 +1,4 @@
 from dataclasses import dataclass
-from datetime import date
-
-from running_addict_plan_extractor.data.garmin_yaml_spi.enum import StepType
 
 
 @dataclass
@@ -11,7 +8,7 @@ class SettingsYamlDTO:
 
 @dataclass
 class StepYamlDTO:
-    type: str
+    step_type: str
     value: str | list["StepYamlDTO"]
 
 

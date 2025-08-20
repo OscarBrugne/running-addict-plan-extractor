@@ -1,7 +1,5 @@
 import os
-from running_addict_plan_extractor.data.garmin_yaml_spi.yaml_writer import (
-    write_training_plan_yaml,
-)
+
 from running_addict_plan_extractor.data.garmin_yaml_spi.yaml_dto import (
     TrainingPlanYamlDTO,
     SettingsYamlDTO,
@@ -9,6 +7,10 @@ from running_addict_plan_extractor.data.garmin_yaml_spi.yaml_dto import (
     StepYamlDTO,
     SchedulePlanYamlDTO,
 )
+from running_addict_plan_extractor.data.garmin_yaml_spi.yaml_writer import (
+    write_training_plan_yaml,
+)
+
 
 if __name__ == "__main__":
     # Run tests with python -m tests.test_yaml_writer
@@ -29,24 +31,24 @@ if __name__ == "__main__":
                 name="interval_VO2Max",
                 steps=[
                     StepYamlDTO(
-                        type="warmup",
+                        step_type="warmup",
                         value="15min @H(z2)",
                     ),
                     StepYamlDTO(
-                        type="repeat(8)",
+                        step_type="repeat(8)",
                         value=[
                             StepYamlDTO(
-                                type="run",
+                                step_type="run",
                                 value="30sec @P($VO2MaxP)",
                             ),
                             StepYamlDTO(
-                                type="recovery",
+                                step_type="recovery",
                                 value="1200m",
                             ),
                         ],
                     ),
                     StepYamlDTO(
-                        type="cooldown",
+                        step_type="cooldown",
                         value="15min @H(z2)",
                     ),
                 ],
@@ -55,15 +57,15 @@ if __name__ == "__main__":
                 name="ga_5k",
                 steps=[
                     StepYamlDTO(
-                        type="warmup",
+                        step_type="warmup",
                         value="1000m @H(z2)",
                     ),
                     StepYamlDTO(
-                        type="run",
+                        step_type="run",
                         value="3000m @P($GA)",
                     ),
                     StepYamlDTO(
-                        type="cooldown",
+                        step_type="cooldown",
                         value="1000m @H(z2)",
                     ),
                 ],
