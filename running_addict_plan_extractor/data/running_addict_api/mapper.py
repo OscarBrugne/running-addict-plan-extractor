@@ -8,9 +8,6 @@ from running_addict_plan_extractor.data.running_addict_api.step_parser import pa
 from running_addict_plan_extractor.model.enum import Day
 from running_addict_plan_extractor.model.model import (
     BaseStep,
-    ConstantStep,
-    IntervalStep,
-    ProgressiveStep,
     Workout,
     TrainingPlan,
 )
