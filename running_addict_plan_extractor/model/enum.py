@@ -11,7 +11,7 @@ class Day(Enum):
     SUNDAY = 6
 
 
-class Pace(Enum):
+class PaceType(Enum):
     BASE = auto()
     FIVE_KM = auto()
     TEN_KM = auto()

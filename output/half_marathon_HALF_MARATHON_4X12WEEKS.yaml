@@ -1,0 +1,244 @@
+settings:
+  deleteSameNameWorkout: true
+definitions:
+  EF: 06:00-07:20
+  Pace42km: 05:06-05:38
+  Pace21km: 04:17-04:43
+  Pace10km: 04:06-04:30
+  Pace5km: 03:55-04:19
+workouts:
+  'Mardi - 50'' - Effort Level: 5':
+  - recovery: 1200sec EF
+  - repeat(5):
+    - run: 240sec Pace10km
+    - recovery: 60sec
+  - recovery: 300sec EF
+  'Jeudi - 40'' - Effort Level: 2':
+  - recovery: 2400sec EF
+  'Samedi - 35'' - Effort Level: 3':
+  - recovery: 1200sec EF
+  - repeat(6):
+    - run: 600sec
+    - recovery: 60sec
+  - recovery: 300sec EF
+  'Dimanche - 1h10 - Effort Level: 3':
+  - recovery: 1800sec EF
+  - repeat(5):
+    - run: 300sec Pace42km
+    - recovery: 180sec
+  - recovery: 300sec EF
+  'Mardi - 55'' - Effort Level: 5':
+  - recovery: 1200sec EF
+  - repeat(5):
+    - run: 300sec Pace10km
+    - recovery: 60sec
+  - recovery: 300sec EF
+  'Samedi - 40'' - Effort Level: 3':
+  - recovery: 1200sec EF
+  - repeat(8):
+    - run: 600sec
+    - recovery: 60sec
+  - recovery: 300sec EF
+  'Dimanche - 1h20 - Effort Level: 3':
+  - recovery: 2400sec EF
+  - repeat(4):
+    - run: 420sec Pace42km
+    - recovery: 120sec
+  - recovery: 300sec EF
+  'Mardi - 1h - Effort Level: 5':
+  - recovery: 1200sec EF
+  - repeat(5):
+    - run: 360sec Pace10km
+    - recovery: 60sec
+  - recovery: 300sec EF
+  'Samedi - 45'' - Effort Level: 3':
+  - recovery: 1200sec EF
+  - repeat(10):
+    - run: 600sec
+    - recovery: 60sec
+  - recovery: 300sec EF
+  'Dimanche - 1h30 - Effort Level: 3':
+  - recovery: 3000sec EF
+  - repeat(3):
+    - run: 600sec Pace42km
+    - recovery: 120sec
+  - recovery: 300sec EF
+  'Mardi - 40'' - Effort Level: 1':
+  - recovery: 2400sec EF
+  'Jeudi - 40'' - Effort Level: 3':
+  - recovery: 900sec EF
+  - repeat(5):
+    - run: 120sec Pace10km
+    - recovery: 60sec
+  - recovery: 600sec EF
+  'Samedi - REPOS - Effort Level: 3':
+  - other: 0sec repos
+  'Dimanche - 1h15 - Effort Level: 2':
+  - recovery: 3600sec EF
+  'Jeudi - 45'' - Effort Level: 2':
+  - recovery: 2700sec EF
+  'Samedi - 50'' - Effort Level: 3':
+  - recovery: 1800sec EF
+  - other: "0sec 8x45\" en c\xF4te (recup descente en footing lent)"
+  - recovery: 300sec EF
+  'Dimanche - 1h30 - Effort Level: 4':
+  - recovery: 3000sec EF
+  - repeat(4):
+    - run: 300sec Pace21km
+    - recovery: 120sec
+  - recovery: 900sec EF
+  'Samedi - 55'' - Effort Level: 3':
+  - recovery: 1800sec EF
+  - other: "0sec 12x30\" en c\xF4te (recup descente en footing lent)"
+  - recovery: 300sec EF
+  'Dimanche - 1h35 - Effort Level: 4':
+  - recovery: 3000sec EF
+  - repeat(4):
+    - run: 360sec Pace21km
+    - recovery: 120sec
+  - recovery: 900sec EF
+  'Samedi - 1h - Effort Level: 3':
+  - recovery: 1800sec EF
+  - other: "0sec 14x30\" en c\xF4te (recup descente en footing lent)"
+  - recovery: 300sec EF
+  'Dimanche - 1h40 - Effort Level: 4':
+  - recovery: 3600sec EF
+  - run: 900sec Pace42km
+  - recovery: 300sec EF
+  'Samedi - 40'' - Effort Level: 2':
+  - recovery: 1800sec EF
+  - other: "0sec 6 \xE0 8x100m environ en acc\xE9l\xE9ration progressive"
+  - recovery: 300sec EF
+  'Mardi - 1h05 - Effort Level: 5':
+  - recovery: 1200sec EF
+  - repeat(3):
+    - run: 600sec Pace21km
+    - recovery: 120sec
+  - recovery: 600sec EF
+  'Mardi - 45'' - Effort Level: 2':
+  - recovery: 2700sec EF
+  'Jeudi - 1h - Effort Level: 5':
+  - recovery: 1200sec EF
+  - repeat(2):
+    - run: 900sec Pace21km
+    - recovery: 120sec
+  - recovery: 600sec EF
+  'Samedi - 45'' - Effort Level: 2':
+  - recovery: 2700sec EF
+  'Dimanche - 1h45 - Effort Level: 3':
+  - recovery: 3600sec EF
+  - run: 1200sec Pace42km
+  - recovery: 300sec EF
+  'Mardi - 65'' - Effort Level: 5':
+  - recovery: 1200sec EF
+  - repeat(2):
+    - run: 1200sec Pace21km
+    - recovery: 180sec
+  - recovery: 300sec EF
+  'Jeudi - 40'' - Effort Level: 1':
+  - recovery: 2400sec EF
+  'Samedi - 25'' - Effort Level: 1':
+  - recovery: 1500sec EF
+  'Dimanche - 1h - Effort Level: 3':
+  - recovery: 1800sec EF
+  - repeat(3):
+    - run: 300sec Pace21km
+    - recovery: 300sec
+  - recovery: 300sec EF
+  'Mardi - 30'' - Effort Level: 1':
+  - recovery: 1500sec EF
+  - other: "0sec 6x100m en acc\xE9l\xE9ration progressive"
+  'Jeudi - 30'' - Effort Level: 1':
+  - recovery: 900sec EF
+  - repeat(3):
+    - run: 120sec Pace21km
+    - recovery: 120sec
+  - recovery: 300sec EF
+  'Dimanche - COURSE - Effort Level: 6':
+  - other: 0sec semi-marathon !
+schedulePlan:
+  start_from: '2025-08-18'
+  workouts:
+  - rest
+  - 'Mardi - 50'' - Effort Level: 5'
+  - rest
+  - 'Jeudi - 40'' - Effort Level: 2'
+  - rest
+  - 'Samedi - 35'' - Effort Level: 3'
+  - 'Dimanche - 1h10 - Effort Level: 3'
+  - rest
+  - 'Mardi - 55'' - Effort Level: 5'
+  - rest
+  - 'Jeudi - 40'' - Effort Level: 2'
+  - rest
+  - 'Samedi - 40'' - Effort Level: 3'
+  - 'Dimanche - 1h20 - Effort Level: 3'
+  - rest
+  - 'Mardi - 1h - Effort Level: 5'
+  - rest
+  - 'Jeudi - 40'' - Effort Level: 2'
+  - rest
+  - 'Samedi - 45'' - Effort Level: 3'
+  - 'Dimanche - 1h30 - Effort Level: 3'
+  - rest
+  - 'Mardi - 40'' - Effort Level: 1'
+  - rest
+  - 'Jeudi - 40'' - Effort Level: 3'
+  - rest
+  - 'Samedi - REPOS - Effort Level: 3'
+  - 'Dimanche - 1h15 - Effort Level: 2'
+  - rest
+  - 'Mardi - 50'' - Effort Level: 5'
+  - rest
+  - 'Jeudi - 45'' - Effort Level: 2'
+  - rest
+  - 'Samedi - 50'' - Effort Level: 3'
+  - 'Dimanche - 1h30 - Effort Level: 4'
+  - rest
+  - 'Mardi - 55'' - Effort Level: 5'
+  - rest
+  - 'Jeudi - 45'' - Effort Level: 2'
+  - rest
+  - 'Samedi - 55'' - Effort Level: 3'
+  - 'Dimanche - 1h35 - Effort Level: 4'
+  - rest
+  - 'Mardi - 1h - Effort Level: 5'
+  - rest
+  - 'Jeudi - 45'' - Effort Level: 2'
+  - rest
+  - 'Samedi - 1h - Effort Level: 3'
+  - 'Dimanche - 1h40 - Effort Level: 4'
+  - rest
+  - 'Mardi - 40'' - Effort Level: 1'
+  - rest
+  - 'Jeudi - 40'' - Effort Level: 3'
+  - rest
+  - 'Samedi - 40'' - Effort Level: 2'
+  - 'Dimanche - 1h15 - Effort Level: 2'
+  - rest
+  - 'Mardi - 1h05 - Effort Level: 5'
+  - rest
+  - 'Jeudi - 45'' - Effort Level: 2'
+  - rest
+  - 'Samedi - 50'' - Effort Level: 3'
+  - 'Dimanche - 1h40 - Effort Level: 4'
+  - rest
+  - 'Mardi - 45'' - Effort Level: 2'
+  - rest
+  - 'Jeudi - 1h - Effort Level: 5'
+  - rest
+  - 'Samedi - 45'' - Effort Level: 2'
+  - 'Dimanche - 1h45 - Effort Level: 3'
+  - rest
+  - 'Mardi - 65'' - Effort Level: 5'
+  - rest
+  - 'Jeudi - 40'' - Effort Level: 1'
+  - rest
+  - 'Samedi - 25'' - Effort Level: 1'
+  - 'Dimanche - 1h - Effort Level: 3'
+  - rest
+  - 'Mardi - 30'' - Effort Level: 1'
+  - rest
+  - 'Jeudi - 30'' - Effort Level: 1'
+  - rest
+  - 'Dimanche - COURSE - Effort Level: 6'

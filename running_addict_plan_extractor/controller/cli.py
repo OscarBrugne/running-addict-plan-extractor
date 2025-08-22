@@ -1,8 +1,14 @@
 import argparse
+import os
 
-from running_addict_plan_extractor.config import TrainingPlanType
+from running_addict_plan_extractor.config import (
+    TrainingPlanType,
+    DAYS,
+    START_DATE,
+    SAVE_DIRECTORY,
+)
 from running_addict_plan_extractor.model.model import TrainingPlan
-from running_addict_plan_extractor.service import running_addict_service
+from running_addict_plan_extractor.service import running_addict_service, garmin_service
 
 
 PLAN_CHOICES: dict[str, TrainingPlanType] = {
@@ -19,6 +25,17 @@ def run() -> None:
         training_plan
     )
     print(training_plan_str)
+
+    save_filepath: str = os.path.join(
+        SAVE_DIRECTORY, f"half_marathon_{plan_type.name}.yaml"
+    )
+    garmin_service.create_yaml_garmin_training_plan(
+        training_plan,
+        save_filepath,
+        START_DATE,
+        DAYS,
+    )
+    print(f"Garmin training plan saved to {save_filepath}")
 
 
 def parse_args() -> TrainingPlanType:

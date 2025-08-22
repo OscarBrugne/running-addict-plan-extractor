@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from running_addict_plan_extractor.model.enum import Day, Pace
+from running_addict_plan_extractor.model.enum import Day, PaceType
 
 
 @dataclass
@@ -11,7 +11,7 @@ class BaseStep:
 @dataclass
 class ConstantStep(BaseStep):
     duration_minutes: float
-    pace: Pace
+    pace: PaceType
 
 
 @dataclass
@@ -24,8 +24,8 @@ class IntervalStep(BaseStep):
 @dataclass
 class ProgressiveStep(BaseStep):
     duration_minutes: float
-    start_pace: Pace
-    end_pace: Pace
+    start_pace: PaceType
+    end_pace: PaceType
 
 
 @dataclass
@@ -41,3 +41,21 @@ class TrainingPlan:
     description: str
     workouts: list[Workout]
     days: list[Day]
+
+
+@dataclass
+class Pace:
+    minutes: int
+    seconds: int
+
+    def __lt__(self, other: "Pace") -> bool:
+        return (self.minutes, self.seconds) < (other.minutes, other.seconds)
+
+    def __le__(self, other: "Pace") -> bool:
+        return (self.minutes, self.seconds) <= (other.minutes, other.seconds)
+
+    def __gt__(self, other: "Pace") -> bool:
+        return (self.minutes, self.seconds) > (other.minutes, other.seconds)
+
+    def __ge__(self, other: "Pace") -> bool:
+        return (self.minutes, self.seconds) >= (other.minutes, other.seconds)

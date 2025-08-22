@@ -3,7 +3,7 @@ import re
 from running_addict_plan_extractor.data.running_addict_api.dto import (
     StepRunningAddictDTO,
 )
-from running_addict_plan_extractor.model.enum import Pace
+from running_addict_plan_extractor.model.enum import PaceType
 from running_addict_plan_extractor.model.model import (
     BaseStep,
     ConstantStep,
@@ -79,26 +79,26 @@ def parse_duration(duration_str: str) -> float:
     return hours * 60 + minutes + seconds / 60
 
 
-def parse_pace(pace_str: str) -> Pace:
+def parse_pace(pace_str: str) -> PaceType:
     match: re.Match[str] | None = PACE_REGEX.search(pace_str)
     if not match:
         raise ParseError(f"Unknown pace format: '{pace_str}'")
 
     pace_val: str = match.group(1).lower()
     if "ef" in pace_val in pace_val:
-        return Pace.BASE
+        return PaceType.BASE
     if "5km" in pace_val:
-        return Pace.FIVE_KM
+        return PaceType.FIVE_KM
     if "10km" in pace_val:
-        return Pace.TEN_KM
+        return PaceType.TEN_KM
     if "21km" in pace_val:
-        return Pace.HALF_MARATHON
+        return PaceType.HALF_MARATHON
     if "42km" in pace_val:
-        return Pace.MARATHON
+        return PaceType.MARATHON
     if "footing" in pace_val or "lent" in pace_val:
-        return Pace.SLOW
+        return PaceType.SLOW
     if "côte" in pace_val:
-        return Pace.HILL
+        return PaceType.HILL
 
     raise ParseError(f"Unknown pace format: '{pace_str}'")
 
@@ -111,7 +111,7 @@ def parse_constant_step(description: str) -> ConstantStep:
     duration_str: str = description.replace(match.group("pace"), "").strip()
     pace_str: str = match.group("pace").strip()
     duration_minutes: float = parse_duration(duration_str)
-    pace: Pace = parse_pace(pace_str)
+    pace: PaceType = parse_pace(pace_str)
 
     return ConstantStep(
         description=description, duration_minutes=duration_minutes, pace=pace
@@ -144,8 +144,8 @@ def parse_progressive_step(description: str) -> ProgressiveStep:
 
     duration_str: str = description.split("progressif")[0].strip()
     duration_minutes: float = parse_duration(duration_str)
-    start_pace: Pace = parse_pace(match.group("start_pace").strip())
-    end_pace: Pace = parse_pace(match.group("end_pace").strip())
+    start_pace: PaceType = parse_pace(match.group("start_pace").strip())
+    end_pace: PaceType = parse_pace(match.group("end_pace").strip())
 
     return ProgressiveStep(
         description=description,
