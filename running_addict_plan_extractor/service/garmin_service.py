@@ -55,7 +55,7 @@ def map_training_plan_to_garmin(
 
     return garmin_yaml_spi.TrainingPlanGarmin(
         workouts=workouts_garmin,
-        days=plan.days,
+        days=days,
         start_date=start_date,
         intensity_definitions=definitions,
     )
@@ -194,7 +194,6 @@ def rename_workouts(
         description: str = " | ".join(step_descriptions)
 
         workout.name = f"S{week_number}E{day_number} : {description}"
-        print(workout.name)
 
     return workouts
 
