@@ -92,6 +92,14 @@ def map_workout_to_garmin(workout: Workout) -> garmin_yaml_spi.WorkoutGarmin:
     steps_garmin: list[garmin_yaml_spi.StepGarmin | garmin_yaml_spi.RepeatGarmin] = []
     for step in workout.steps:
         steps_garmin.append(map_base_step_to_garmin(step))
+
+    # Change the type of the first to warmup and the last to cooldown if there are enough steps
+    if len(steps_garmin) >= 2:
+        if isinstance(steps_garmin[0], garmin_yaml_spi.StepGarmin):
+            steps_garmin[0].step_type = garmin_yaml_spi.StepType.WARMUP
+    if len(steps_garmin) >= 3:
+        if isinstance(steps_garmin[-1], garmin_yaml_spi.StepGarmin):
+            steps_garmin[-1].step_type = garmin_yaml_spi.StepType.COOLDOWN
     return garmin_yaml_spi.WorkoutGarmin(name=workout.title, steps=steps_garmin)
 
 
@@ -118,7 +126,7 @@ def map_constant_step(
     """Map a constant step to StepGarmin."""
     duration_seconds = int(step.duration_minutes * 60)
 
-    if step.pace in [PaceType.BASE, PaceType.SLOW]:
+    if no_pace:
         step_type: garmin_yaml_spi.StepType = garmin_yaml_spi.StepType.RECOVERY
     else:
         step_type = garmin_yaml_spi.StepType.RUN
