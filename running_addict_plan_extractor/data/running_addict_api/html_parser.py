@@ -18,11 +18,28 @@ def parse_training_plan(html: str) -> TrainingPlanRunningAddictDTO:
     Returns:
         TrainingPlanRunningAddictDTO: The parsed training plan data.
     """
+    html = clean_text(html)
     soup: bs4.BeautifulSoup = bs4.BeautifulSoup(html, "html.parser")
     training_plan_container: bs4.Tag = extract_training_plan_container(soup)
     title: str = extract_title(training_plan_container)
     weeks: list[WeekRunningAddictDTO] = extract_weeks(training_plan_container)
     return TrainingPlanRunningAddictDTO(title, weeks)
+
+
+def clean_text(text: str) -> str:
+    return (
+        text.strip()
+        .replace("’", "'")
+        .replace("′", "'")
+        .replace("″", '"')
+        .replace("×", "x")
+        .replace("\xe9", "e")  # é
+        .replace("\xe8", "e")  # è
+        .replace("\xe0", "a")  # à
+        .replace("\xe7", "c")  # ç
+        .replace("\xee", "i")  # î
+        .replace("\xf4", "o")  # ô
+    )
 
 
 def extract_training_plan_container(soup: bs4.BeautifulSoup) -> bs4.Tag:

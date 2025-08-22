@@ -26,9 +26,7 @@ def run() -> None:
     )
     print(training_plan_str)
 
-    save_filepath: str = os.path.join(
-        SAVE_DIRECTORY, f"half_marathon_{plan_type.name}.yaml"
-    )
+    save_filepath: str = os.path.join(SAVE_DIRECTORY, f"{plan_type.name.lower()}.yaml")
     garmin_service.create_yaml_garmin_training_plan(
         training_plan,
         save_filepath,
@@ -50,4 +48,6 @@ def parse_args() -> TrainingPlanType:
     )
 
     args: argparse.Namespace = parser.parse_args()
+    assert args.plan in PLAN_CHOICES
+
     return PLAN_CHOICES[args.plan]

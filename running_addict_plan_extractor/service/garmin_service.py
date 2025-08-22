@@ -44,12 +44,14 @@ def map_training_plan_to_garmin(
     workouts_garmin: list[garmin_yaml_spi.WorkoutGarmin] = [
         map_workout_to_garmin(workout) for workout in plan.workouts
     ]
-
     if not days:
         days = plan.days
     assert len(days) == len(plan.days)
-
     definitions: dict[str, str] = generate_intensity_definitions()
+
+    # Drop the workout corresponding to the race
+    workouts_garmin = workouts_garmin[:-1]
+    workouts_garmin = rename_workouts(workouts_garmin, days)
 
     return garmin_yaml_spi.TrainingPlanGarmin(
         workouts=workouts_garmin,
@@ -175,3 +177,50 @@ def map_progressive_step(step: ProgressiveStep) -> garmin_yaml_spi.StepGarmin:
         duration_seconds=duration_sec,
         intensity_target=intensity_target,
     )
+
+
+def rename_workouts(
+    workouts: list[garmin_yaml_spi.WorkoutGarmin], days: list[Day]
+) -> list[garmin_yaml_spi.WorkoutGarmin]:
+    weekly_workout_count: int = len(days)
+
+    for i, workout in enumerate(workouts):
+        week_number: int = (i // weekly_workout_count) + 1
+        day_number: int = (i % weekly_workout_count) + 1
+
+        step_descriptions: list[str] = []
+        for step in workout.steps:
+            step_descriptions.append(describe_step(step))
+        description: str = " | ".join(step_descriptions)
+
+        workout.name = f"S{week_number}E{day_number} : {description}"
+        print(workout.name)
+
+    return workouts
+
+
+def describe_step(
+    step: garmin_yaml_spi.StepGarmin | garmin_yaml_spi.RepeatGarmin,
+) -> str:
+    if isinstance(step, garmin_yaml_spi.RepeatGarmin):
+        run_desc: str = describe_step(step.run_step)
+        rec_desc: str = describe_step(step.recovery_step)
+        return f"{step.count} x {run_desc} + {rec_desc}"
+
+    elif isinstance(step, garmin_yaml_spi.StepGarmin):
+        minutes: int = step.duration_seconds // 60
+        seconds: int = step.duration_seconds % 60
+
+        if minutes > 0 and seconds > 0:
+            duration: str = f"{minutes}'{seconds:02}"
+        elif minutes > 0:
+            duration = f"{minutes}'"
+        else:
+            duration = f'{seconds}"'
+
+        intensity: str = step.intensity_target if step.intensity_target else "Recup"
+
+        return f"{duration} {intensity}"
+
+    else:
+        return "Inconnu"

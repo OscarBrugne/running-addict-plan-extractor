@@ -40,14 +40,7 @@ class ParseError(Exception):
 
 def parse_step(step_dto: StepRunningAddictDTO) -> BaseStep:
     description: str = (
-        step_dto.description.replace("’", "'")
-        .replace("′", "'")
-        .replace("″", '"')
-        .replace("×", "x")
-        .replace(" x", "x")
-        .replace("x ", "x")
-        .lower()
-        .strip()
+        step_dto.description.replace(" x", "x").replace("x ", "x").lower().strip()
     )
     try:
         if CONSTANT_STEP_REGEX.match(description):
