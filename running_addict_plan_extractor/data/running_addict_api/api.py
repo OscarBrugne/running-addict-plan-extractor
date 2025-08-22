@@ -1,5 +1,4 @@
-from enum import Enum, auto
-
+from running_addict_plan_extractor.config import TrainingPlanType
 from running_addict_plan_extractor.data import client
 from running_addict_plan_extractor.data.running_addict_api import html_parser
 from running_addict_plan_extractor.data.running_addict_api.dto import (
@@ -7,12 +6,6 @@ from running_addict_plan_extractor.data.running_addict_api.dto import (
 )
 from running_addict_plan_extractor.data.running_addict_api import mapper
 from running_addict_plan_extractor.model.model import TrainingPlan
-
-
-class TrainingPlanType(Enum):
-    HALF_MARATHON_3X12WEEKS = auto()
-    HALF_MARATHON_4X12WEEKS = auto()
-    HALF_MARATHON_1H30 = auto()
 
 
 TRAINING_PLAN_URLS: dict[TrainingPlanType, str] = {
