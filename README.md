@@ -57,11 +57,15 @@ Running Addict Plan Extractor is a tool designed to help you extract running tra
 **Linux/macOS:**
 
 ```bash
-python3 -m running_addict_plan_extractor
+python3 -m running_addict_plan_extractor [plan]
 ```
 
 **Windows:**
 
 ```cmd
-python -m running_addict_plan_extractor
+python -m running_addict_plan_extractor [plan]
 ```
+
+### Arguments
+
+- `plan`: The training plan to use (e.g., `3x12`, `4x12`, `1h30`).

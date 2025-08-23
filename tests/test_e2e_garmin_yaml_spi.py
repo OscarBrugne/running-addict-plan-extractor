@@ -73,19 +73,19 @@ if __name__ == "__main__":
         intensity_target="@P($Pace21km)",
     )
     workout_s1e2: WorkoutGarmin = WorkoutGarmin(
-        name="S1E2_Example", steps=[example_step]
+        name="S1E2 Example", steps=[example_step]
     )
     workout_s1e3: WorkoutGarmin = WorkoutGarmin(
-        name="S1E3_Example", steps=[example_step]
+        name="S1E3 - Example", steps=[example_step]
     )
     workout_s1e4: WorkoutGarmin = WorkoutGarmin(
-        name="S1E4_Example", steps=[example_step]
+        name="S1E4 ' Example", steps=[example_step]
     )
     workout_s2e1: WorkoutGarmin = WorkoutGarmin(
-        name="S2E1_Example", steps=[example_step]
+        name="S2E1 : Example", steps=[example_step]
     )
     workout_s2e2: WorkoutGarmin = WorkoutGarmin(
-        name="S2E2_Example", steps=[example_step]
+        name="S2E2 : Example", steps=[example_step]
     )
 
     workouts: list[WorkoutGarmin] = [

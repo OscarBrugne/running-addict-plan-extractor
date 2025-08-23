@@ -1,15 +1,53 @@
-from running_addict_plan_extractor.service import running_addict_service
+import argparse
+import os
+
+from running_addict_plan_extractor.config import (
+    TrainingPlanType,
+    DAYS,
+    START_DATE,
+    SAVE_DIRECTORY,
+)
+from running_addict_plan_extractor.model.model import TrainingPlan
+from running_addict_plan_extractor.service import running_addict_service, garmin_service
+
+
+PLAN_CHOICES: dict[str, TrainingPlanType] = {
+    "3x12": TrainingPlanType.HALF_MARATHON_3X12WEEKS,
+    "4x12": TrainingPlanType.HALF_MARATHON_4X12WEEKS,
+    "1h30": TrainingPlanType.HALF_MARATHON_1H30,
+}
 
 
 def run() -> None:
-    title: str = running_addict_service.get_training_plan_title()
-    print(title)
-    print()
+    plan_type: TrainingPlanType = parse_args()
+    training_plan: TrainingPlan = running_addict_service.get_training_plan(plan_type)
+    training_plan_str: str = running_addict_service.pretty_format_training_plan(
+        training_plan
+    )
+    print(training_plan_str)
 
-    training_plan: str = running_addict_service.get_training_plan_str()
-    print(training_plan)
-    print()
+    save_filepath: str = os.path.join(SAVE_DIRECTORY, f"{plan_type.name.lower()}.yaml")
+    garmin_service.create_yaml_garmin_training_plan(
+        training_plan,
+        save_filepath,
+        START_DATE,
+        DAYS,
+    )
+    print(f"Garmin training plan saved to {save_filepath}")
 
-    steps: list[str] = running_addict_service.get_steps_description()
-    for step in steps:
-        print(step)
+
+def parse_args() -> TrainingPlanType:
+    parser = argparse.ArgumentParser(
+        description="Export a Running Addict training plan to Garmin YAML."
+    )
+    parser.add_argument(
+        "plan",
+        choices=PLAN_CHOICES.keys(),
+        type=str,
+        help="Select a training plan (3x12, 4x12, 1h30)",
+    )
+
+    args: argparse.Namespace = parser.parse_args()
+    assert args.plan in PLAN_CHOICES
+
+    return PLAN_CHOICES[args.plan]

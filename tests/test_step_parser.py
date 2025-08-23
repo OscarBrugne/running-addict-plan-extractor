@@ -4,7 +4,7 @@ from running_addict_plan_extractor.data.running_addict_api.step_parser import (
 from running_addict_plan_extractor.data.running_addict_api.dto import (
     StepRunningAddictDTO,
 )
-from running_addict_plan_extractor.model.enum import Pace
+from running_addict_plan_extractor.model.enum import PaceType
 from running_addict_plan_extractor.model.model import (
     BaseStep,
     ConstantStep,

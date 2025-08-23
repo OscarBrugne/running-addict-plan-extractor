@@ -1,4 +1,5 @@
 from typing import Any
+import os
 import yaml
 
 from running_addict_plan_extractor.data.garmin_yaml_spi.yaml_dto import (
@@ -9,6 +10,8 @@ from running_addict_plan_extractor.data.garmin_yaml_spi.yaml_dto import (
 
 def write_training_plan_yaml(plan: TrainingPlanYamlDTO, file_path: str) -> None:
     plan_dict: dict[str, Any] = training_plan_to_yaml_dict(plan)
+
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
     with open(file_path, "w") as file:
         yaml.safe_dump(plan_dict, file, sort_keys=False)
 
