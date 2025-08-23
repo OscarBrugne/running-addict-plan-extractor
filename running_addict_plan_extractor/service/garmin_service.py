@@ -140,7 +140,7 @@ def map_constant_step(
         PaceType.HALF_MARATHON,
         PaceType.MARATHON,
     ]:
-        intensity_target = PACE_DEFINITIONS[step.pace]
+        intensity_target = f"@P({PACE_DEFINITIONS[step.pace]})"
     else:
         intensity_target: str | None = None
 
